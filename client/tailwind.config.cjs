@@ -6,6 +6,7 @@ module.exports = {
       screens: {
         xs: "480px",
       },
+      width: {},
       fontFamily: {
         inter: ["Inter var", "san-serif"],
       },
