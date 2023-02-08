@@ -93,15 +93,18 @@ const Home = () => {
           <>
             {searchText && (
               <h2 className="mb=3 text-xl font-medium text-[#666e75]">
-                Showing results for
+                Showing results for &nbsp;
                 <span className="text-[#222328]">{searchText}</span>
               </h2>
             )}
             <div className="grid grid-cols-1 gap-3 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
               {searchText ? (
-                <RenderCards data={[]} title="No search results found" />
+                <RenderCards
+                  data={searchedResults}
+                  title="No search results found"
+                />
               ) : (
-                <RenderCards data={allPosts} title="no posts found" />
+                <RenderCards data={allPosts} title="No Posts Yet" />
               )}
             </div>
           </>
