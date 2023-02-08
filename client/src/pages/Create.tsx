@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { preview } from "../assets";
 import { FormField, Loader } from "../components";
 import { useNavigate } from "react-router-dom";
+import { getRandomPrompt } from "../utils";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -13,8 +14,13 @@ const Create = () => {
   const [generatingImg, setGeneratingImg] = useState<boolean>(false);
   const [loading, setloading] = useState<boolean>(false);
   const handleSubmit = () => {};
-  const handleChange = (e: FormEvent) => {};
-  const handleSupriseMe = () => {};
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSupriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
   const generateImg = () => {};
   return (
     <section className="mx-auto max-w-7xl">
