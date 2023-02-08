@@ -13,14 +13,37 @@ const Create = () => {
   });
   const [generatingImg, setGeneratingImg] = useState<boolean>(false);
   const [loading, setloading] = useState<boolean>(false);
-  const handleSubmit = () => {};
+  
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (form.prompt && form.photo) {
+      setloading(true);
+      try {
+        const res = await fetch("http://localhost:8080/api/v1/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+        await res.json();
+        navigate("/");
+      } catch (error) {
+      } finally {
+        setloading(false);
+      }
+    }
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
   const handleSupriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm({ ...form, prompt: randomPrompt });
   };
+
   const generateImg = async () => {
     if (form.prompt) {
       try {
